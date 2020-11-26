@@ -10,11 +10,17 @@ CONFIG += c++11
 
 SOURCES += \
     FileSystem/filesystemwidget.cpp \
+    OSInitializer/linuxinitializerstrategy.cpp \
+    OSInitializer/osinitializercreator.cpp \
+    OSInitializer/osinitializerstrategy.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     FileSystem/filesystemwidget.h \
+    OSInitializer/linuxinitializerstrategy.h \
+    OSInitializer/osinitializercreator.h \
+    OSInitializer/osinitializerstrategy.h
     mainwindow.h
 
 FORMS += \
@@ -22,7 +28,8 @@ FORMS += \
     mainwindow.ui
 
 INCLUDEPATH += \
-    FileSystem
+    FileSystem \
+    OSInitializer
 
 TRANSLATIONS += \
     MyFileManager_en_US.ts
