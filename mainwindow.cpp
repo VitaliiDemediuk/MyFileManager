@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "filesystemworker.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

@@ -24,10 +24,10 @@
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="FileSystemWidget" name="widget" native="true"/>
+       <widget class="FileSystemWidget" name="FirstFileSystemWidget" native="true"/>
       </item>
       <item>
-       <widget class="FileSystemWidget" name="widget_2" native="true"/>
+       <widget class="FileSystemWidget" name="SecondFileSystemWidget" native="true"/>
       </item>
      </layout>
     </item>

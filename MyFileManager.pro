@@ -9,7 +9,9 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    FileSystem/abstractfilesystemworker.cpp \
     FileSystem/filesystemwidget.cpp \
+    FileSystem/filesystemworker.cpp \
     OSInitializer/linuxinitializerstrategy.cpp \
     OSInitializer/osinitializercreator.cpp \
     OSInitializer/osinitializerstrategy.cpp \
@@ -17,10 +19,12 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    FileSystem/abstractfilesystemworker.h \
     FileSystem/filesystemwidget.h \
+    FileSystem/filesystemworker.h \
     OSInitializer/linuxinitializerstrategy.h \
     OSInitializer/osinitializercreator.h \
-    OSInitializer/osinitializerstrategy.h
+    OSInitializer/osinitializerstrategy.h \
     mainwindow.h
 
 FORMS += \
