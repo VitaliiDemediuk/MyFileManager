@@ -36,6 +36,8 @@ private slots:
     void clipboardChange();
 private:
     FileSystemWorker();
+    bool PasteFile(const QString &file_path, const QString &paste_path, QWidget *parent);
+    bool PasteDir(const QString &dir_path, const QString &paste_path, QWidget *parent);
     QClipboard *clipboard_ = QGuiApplication::clipboard();
     bool should_cut_ = false;
 };
