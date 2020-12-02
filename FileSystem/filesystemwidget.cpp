@@ -1,18 +1,22 @@
 #include "filesystemwidget.h"
 #include "ui_filesystemwidget.h"
 
-#include <QFileSystemModel>
 #include "filesystemworker.h"
+#include "fileoperations.h"
+#include <QFileSystemModel>
 #include <QModelIndex>
 #include <QDebug>
 #include <QHeaderView>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QMenu>
+#include <QAction>
 
 FileSystemWidget::FileSystemWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FileSystemWidget),
-    file_system_worker_(FileSystemWorker::GetInstance())
+    file_system_worker_(FileSystemWorker::GetInstance()),
+    file_operations_(new FileOperations())
 {
     ui->setupUi(this);
     os_initializer_ = OSInitializerCreator::Create();
@@ -20,6 +24,7 @@ FileSystemWidget::FileSystemWidget(QWidget *parent) :
     ChangeDirModelRootPath(ui->RootsComboBox->itemText(0));
     HideColumns();
     ui->DirTreeView->setAnimated(true);
+    this->setContextMenuPolicy(Qt::CustomContextMenu);
 }
 
 FileSystemWidget::~FileSystemWidget(){
@@ -28,6 +33,11 @@ FileSystemWidget::~FileSystemWidget(){
 
 void FileSystemWidget::on_RootsComboBox_currentTextChanged(const QString &root_path){
     ChangeDirModelRootPath(root_path);
+}
+
+void FileSystemWidget::on_SuffixComboBox_textActivated(const QString &suffix){
+    file_model_->setNameFilterDisables(false);
+    SetFilter(suffix);
 }
 
 void FileSystemWidget::on_DirTreeView_collapsed(const QModelIndex &index){
@@ -66,6 +76,14 @@ void FileSystemWidget::FillRootsComboBox(){
     }
 }
 
+void FileSystemWidget::SetFilter(const QString& suffix){
+    if(suffix != "All files"){
+        file_model_->setNameFilters({"*."+suffix});
+    }else{
+        file_model_->setNameFilters({"*"});
+    }
+}
+
 void FileSystemWidget::ChangeFileModelPath(const QString &path){
     if(file_model_ != nullptr){
         delete this->file_model_;
@@ -76,6 +94,7 @@ void FileSystemWidget::ChangeFileModelPath(const QString &path){
     QModelIndex file_model_index = file_model_->setRootPath(path);
     ui->FileListView->setRootIndex(file_model_index);
     ui->PathLineEdit->setText(path);
+    RefreshSuffixComboBox(path);
 }
 
 void FileSystemWidget::ChangeDirModelRootPath(const QString &root_path){
@@ -88,4 +107,10 @@ void FileSystemWidget::ChangeDirModelRootPath(const QString &root_path){
     QModelIndex dir_model_index = dir_model_->setRootPath(root_path);
     ui->DirTreeView->setRootIndex(dir_model_index);
     ui->DirTreeView->clicked(dir_model_->index(0, 0));
+}
+
+void FileSystemWidget::RefreshSuffixComboBox(const QString& dir_path){
+    ui->SuffixComboBox->clear();
+    ui->SuffixComboBox->addItem("All files");
+    ui->SuffixComboBox->addItems(file_operations_->GetSuffixesFromDir(dir_path));
 }

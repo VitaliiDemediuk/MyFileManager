@@ -168,11 +168,11 @@ bool FileSystemWorker::PasteDir(const QString& dir_path, const QString &paste_pa
             QMessageBox::critical(parent, "Paste error", "Directory " + root_dir_name + " no longer exists!");
             return false;
         }
-        foreach (QString d, src_dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+        for(const QString& d : src_dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
                 QString dst_path = paste_path + QDir::separator() + root_dir_name;
                 PasteDir(dir_path+ QDir::separator() + d, dst_path, parent);
         }
-        foreach (QString f, src_dir.entryList(QDir::Files)) {
+        for(const QString& f : src_dir.entryList(QDir::Files)){
             QFile::copy(dir_path + QDir::separator() + f, paste_path + QDir::separator() + root_dir_name + QDir::separator() + f);
         }
     }
