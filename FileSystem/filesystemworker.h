@@ -15,7 +15,7 @@ enum class ClipBoardType{
 class FileSystemWorker : public AbstractFileSystemWorker{
     Q_OBJECT
 public:
-    static AbstractFileSystemWorker* GetInstance();
+    static AbstractFileSystemWorker& GetInstance();
     FileSystemWorker( const FileSystemWorker&) = delete;
     FileSystemWorker& operator=( FileSystemWorker&) = delete;
 //General operations
@@ -24,13 +24,13 @@ public:
     bool CreateNewFile(const QString &path, const QString &name, QWidget *parent) const override;
     bool CopyFile(const QString &path, QWidget *parent) override;
     bool CutFile(const QString &path, QWidget *parent) override;
-    bool RenameFile(const QString &path, const QString &old_name, const QString &new_name, QWidget *parent) const override;
+    bool RenameFile(const QString &path, const QString &new_name, QWidget *parent) const override;
     bool DeleteFile(const QString &path, QWidget *parent) const override;
 //Directory's standard operations
     bool CreateNewDir(const QString &path, const QString &name, QWidget *parent) const override;
     bool CopyDir(const QString &path, QWidget *parent) override;
     bool CutDir(const QString &path, QWidget *parent) override;
-    bool RenameDir(const QString &path, const QString &old_name, const QString &new_name, QWidget *parent) const override;
+    bool RenameDir(const QString &path, const QString &new_name, QWidget *parent) const override;
     bool DeleteDir(const QString &path, QWidget *parent) const override;
 private slots:
     void clipboardChange();

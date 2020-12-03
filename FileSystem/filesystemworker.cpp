@@ -14,9 +14,9 @@ FileSystemWorker::FileSystemWorker(){
     connect(clipboard_, SIGNAL(dataChanged()), this, SLOT(clipboardChange()));
 }
 
-AbstractFileSystemWorker* FileSystemWorker::GetInstance(){
+AbstractFileSystemWorker& FileSystemWorker::GetInstance(){
     static FileSystemWorker instance;
-    return &instance;
+    return instance;
 }
 
 bool FileSystemWorker::Paste(const QString &path, QWidget *parent){
@@ -67,8 +67,8 @@ bool FileSystemWorker::CutFile(const QString &path, QWidget *parent){
     return result;
 }
 
-bool FileSystemWorker::RenameFile(const QString &path, const QString &old_name, const QString &new_name, QWidget *parent) const{
-    bool is_rename = QFile::rename(path + QDir::separator() + old_name, path + QDir::separator() + new_name);
+bool FileSystemWorker::RenameFile(const QString &path, const QString &new_name, QWidget *parent) const{
+    bool is_rename = QFile::rename(path, QFileInfo(path).dir().path() + QDir::separator() + new_name);
     if(!is_rename){
         QMessageBox::critical(parent, "Renaming error", "Can not rename this file!");
     }
@@ -113,8 +113,11 @@ bool FileSystemWorker::CutDir(const QString &path, QWidget *parent){
     return result;
 }
 
-bool FileSystemWorker::RenameDir(const QString &path, const QString &old_name, const QString &new_name, QWidget *parent) const{
-    bool is_rename = QDir(path).rename(old_name, new_name);
+bool FileSystemWorker::RenameDir(const QString &path, const QString &new_name, QWidget *parent) const{
+    QDir dir(path);
+    QString dir_name = dir.dirName();
+    dir.cdUp();
+    bool is_rename = dir.rename(dir_name, new_name);
     if(!is_rename){
         QMessageBox::critical(parent, "Renaming error", "Can not rename this directory!");
     }
@@ -140,7 +143,7 @@ void FileSystemWorker::clipboardChange(){
 //PRIVATE METHODS---------------------------------------------------------------------------
 
 bool FileSystemWorker::PasteFile(const QString& file_path, const QString &paste_path, QWidget *parent){
-    bool is_correct;
+    bool is_correct = true;
     if(should_cut_){
         is_correct = QFile::rename(file_path, paste_path+QDir::separator()+QFileInfo(file_path).fileName());
         should_cut_ = false;
@@ -150,6 +153,7 @@ bool FileSystemWorker::PasteFile(const QString& file_path, const QString &paste_
     if(!is_correct){
         QMessageBox::critical(parent, "Paste error", "Paste error!");
     }
+    return is_correct;
 }
 
 bool FileSystemWorker::PasteDir(const QString& dir_path, const QString &paste_path, QWidget *parent){
@@ -179,4 +183,5 @@ bool FileSystemWorker::PasteDir(const QString& dir_path, const QString &paste_pa
     if(!is_correct){
         QMessageBox::critical(parent, "Paste error", "Paste error!");
     }
+    return is_correct;
 }

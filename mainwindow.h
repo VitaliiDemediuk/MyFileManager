@@ -13,6 +13,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+private slots:
+    void on_FirstFileSystemWidget_customContextMenuRequested(const QPoint &pos);
+
+    void on_SecondFileSystemWidget_customContextMenuRequested(const QPoint &pos);
+
 private:
     Ui::MainWindow *ui;
 
