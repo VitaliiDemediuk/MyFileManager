@@ -27,10 +27,20 @@ FileSystemWidget::FileSystemWidget(QWidget *parent) :
     HideColumns();
     ui->DirTreeView->setAnimated(true);
     this->setContextMenuPolicy(Qt::CustomContextMenu);
+    this->setFocusProxy(ui->FileListView);
 }
 
 FileSystemWidget::~FileSystemWidget(){
     delete ui;
+}
+
+QString FileSystemWidget::GetFile() const{
+    QModelIndex cur_index = ui->FileListView->currentIndex();
+    if(cur_index.isValid()){
+        return file_model_->filePath(cur_index);
+    }else{
+        return "";
+    }
 }
 
 //SLOTS

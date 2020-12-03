@@ -23,6 +23,7 @@ class FileSystemWidget : public QWidget
 public:
     explicit FileSystemWidget(QWidget *parent = nullptr);
     ~FileSystemWidget();
+    QString GetFile() const;
 public slots:
     void slotOpenContextMenu(const QPoint &pos);
 private slots:

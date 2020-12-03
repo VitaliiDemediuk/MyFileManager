@@ -17,6 +17,7 @@ SOURCES += \
     OSInitializer/linuxinitializerstrategy.cpp \
     OSInitializer/osinitializercreator.cpp \
     OSInitializer/osinitializerstrategy.cpp \
+    TextEditor/texteditor.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -29,16 +30,19 @@ HEADERS += \
     OSInitializer/linuxinitializerstrategy.h \
     OSInitializer/osinitializercreator.h \
     OSInitializer/osinitializerstrategy.h \
+    TextEditor/texteditor.h \
     mainwindow.h
 
 FORMS += \
     FileSystem/filesystemwidget.ui \
+    TextEditor/texteditor.ui \
     mainwindow.ui
 
 INCLUDEPATH += \
     FileSystem \
     FileOperations \
-    OSInitializer
+    OSInitializer \
+    TextEditor
 
 TRANSLATIONS += \
     MyFileManager_en_US.ts
