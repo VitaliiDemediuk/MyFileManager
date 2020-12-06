@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    DialogWindows/mergefilesdialog.cpp \
     FileOperations/abstractfileoperations.cpp \
     FileOperations/fileoperations.cpp \
     FileSystem/abstractfilesystemworker.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    DialogWindows/mergefilesdialog.h \
     FileOperations/abstractfileoperations.h \
     FileOperations/fileoperations.h \
     FileSystem/abstractfilesystemworker.h \
@@ -34,6 +36,7 @@ HEADERS += \
     mainwindow.h
 
 FORMS += \
+    DialogWindows/mergefilesdialog.ui \
     FileSystem/filesystemwidget.ui \
     TextEditor/texteditor.ui \
     mainwindow.ui
@@ -42,7 +45,8 @@ INCLUDEPATH += \
     FileSystem \
     FileOperations \
     OSInitializer \
-    TextEditor
+    TextEditor \
+    DialogWindows
 
 TRANSLATIONS += \
     MyFileManager_en_US.ts

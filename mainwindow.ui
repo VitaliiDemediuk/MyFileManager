@@ -56,7 +56,13 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionMarge_file"/>
   </widget>
+  <action name="actionMarge_file">
+   <property name="text">
+    <string>Marge file</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

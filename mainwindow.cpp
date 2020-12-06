@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "filesystemworker.h"
 #include "texteditor.h"
+#include "mergefilesdialog.h"
 #include <QDebug>
 #include <QRect>
 #include <QKeyEvent>
@@ -52,4 +53,10 @@ void MainWindow::OpenTextEditor(const QString& file_path){
         text_editor_widget_->show();
         this->hide();
     }
+}
+
+void MainWindow::on_actionMarge_file_triggered()
+{
+    MergeFilesDialog *dialog = new MergeFilesDialog(this);
+    dialog->show();
 }

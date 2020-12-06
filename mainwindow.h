@@ -19,6 +19,8 @@ private slots:
     void on_FirstFileSystemWidget_customContextMenuRequested(const QPoint &pos);
     void on_SecondFileSystemWidget_customContextMenuRequested(const QPoint &pos);
 
+    void on_actionMarge_file_triggered();
+
 protected:
 //Key event
     void keyPressEvent(QKeyEvent *pe);
