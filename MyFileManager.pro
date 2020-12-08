@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     DialogWindows/hreffilelistdialog.cpp \
     DialogWindows/mergefilesdialog.cpp \
+    DialogWindows/taglistdialog.cpp \
     FileOperations/abstractfileoperations.cpp \
     FileOperations/fileoperations.cpp \
     FileSystem/abstractfilesystemworker.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 HEADERS += \
     DialogWindows/hreffilelistdialog.h \
     DialogWindows/mergefilesdialog.h \
+    DialogWindows/taglistdialog.h \
     FileOperations/abstractfileoperations.h \
     FileOperations/fileoperations.h \
     FileSystem/abstractfilesystemworker.h \
@@ -40,6 +42,7 @@ HEADERS += \
 FORMS += \
     DialogWindows/hreffilelistdialog.ui \
     DialogWindows/mergefilesdialog.ui \
+    DialogWindows/taglistdialog.ui \
     FileSystem/filesystemwidget.ui \
     TextEditor/texteditor.ui \
     mainwindow.ui

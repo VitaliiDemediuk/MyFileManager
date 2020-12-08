@@ -4,6 +4,7 @@
 #include "filesystemworker.h"
 #include "fileoperations.h"
 #include "hreffilelistdialog.h"
+#include "taglistdialog.h"
 #include <QFileSystemModel>
 #include <QInputDialog>
 #include <QModelIndex>
@@ -163,7 +164,9 @@ void FileSystemWidget::slotHrefFileList(){
 }
 
 void FileSystemWidget::slotTagList(){
-
+    TagListDialog* dialog = new TagListDialog(this);
+    dialog->SetFile(file_model_->filePath(last_model_index_));
+    dialog->show();
 }
 
 //PRIVATE METHODS--------------------------------------------------------
@@ -214,7 +217,7 @@ void FileSystemWidget::ContextMenusInitialization(){
     connect(href_file_list_action, SIGNAL(triggered()), this, SLOT(slotHrefFileList()));
     QAction *tag_list_action = new QAction("Tag list", this);
     html_sub_menu_->addAction(tag_list_action);
-    connect(href_file_list_action, SIGNAL(triggered()), this, SLOT(slotTagList()));
+    connect(tag_list_action, SIGNAL(triggered()), this, SLOT(slotTagList()));
 
 //DIR TREE CONTEXT MENU
     dir_tree_context_menu_ = new QMenu(this);
