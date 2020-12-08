@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    DialogWindows/hreffilelistdialog.cpp \
     DialogWindows/mergefilesdialog.cpp \
     FileOperations/abstractfileoperations.cpp \
     FileOperations/fileoperations.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    DialogWindows/hreffilelistdialog.h \
     DialogWindows/mergefilesdialog.h \
     FileOperations/abstractfileoperations.h \
     FileOperations/fileoperations.h \
@@ -36,6 +38,7 @@ HEADERS += \
     mainwindow.h
 
 FORMS += \
+    DialogWindows/hreffilelistdialog.ui \
     DialogWindows/mergefilesdialog.ui \
     FileSystem/filesystemwidget.ui \
     TextEditor/texteditor.ui \

@@ -42,6 +42,7 @@ void TextEditor::keyPressEvent(QKeyEvent *pe){
             QFile file(file_path_);
             if(file.open(QIODevice::WriteOnly)){
                 file.write(ui->textEdit->toPlainText().toUtf8());
+                file.close();
             }
         }
         main_window_parent_->setGeometry(this->x(), this->y()+37, this->width(), this->height());

@@ -45,8 +45,10 @@ bool FileSystemWorker::CreateNewFile(const QString &path, const QString &name, Q
     bool is_exists = QFile::exists(path + QDir::separator() + name);
     if(!is_exists){
         QFile file(path + QDir::separator() + name);
-        if(!file.open(QIODevice::ReadWrite)){
+        if(!file.open(QIODevice::NewOnly)){
             QMessageBox::critical(parent, "Creating error", "Can not creating file!");
+        }else{
+            file.close();
         }
     }else{
         QMessageBox::critical(parent, "Creating error", "File with this name already exists!");

@@ -45,6 +45,8 @@ private slots:
     void slotCutDir();
     void slotRenameDir();
     void slotDeleteDir();
+    void slotHrefFileList();
+    void slotTagList();
 private:
     Ui::FileSystemWidget *ui;
     QFileSystemModel *file_model_ = nullptr;
@@ -56,6 +58,7 @@ private:
     QMenu *file_list_context_menu_;
     QMenu *empty_file_list_context_menu_;
     QMenu *dir_tree_context_menu_;
+    QMenu *html_sub_menu_;
     void ContextMenusInitialization();
     void HideColumns();
     void FillRootsComboBox();

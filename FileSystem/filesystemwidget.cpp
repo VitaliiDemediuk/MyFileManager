@@ -3,6 +3,7 @@
 
 #include "filesystemworker.h"
 #include "fileoperations.h"
+#include "hreffilelistdialog.h"
 #include <QFileSystemModel>
 #include <QInputDialog>
 #include <QModelIndex>
@@ -12,6 +13,7 @@
 #include <QUrl>
 #include <QMenu>
 #include <QAction>
+#include <QFileInfo>
 
 FileSystemWidget::FileSystemWidget(QWidget *parent) :
     QWidget(parent),
@@ -154,6 +156,16 @@ void FileSystemWidget::slotDeleteDir(){
     file_system_worker_.DeleteDir(dir_model_->filePath(last_model_index_), this);
 }
 
+void FileSystemWidget::slotHrefFileList(){
+    HRefFileListDialog* dialog = new HRefFileListDialog(this);
+    dialog->SetFile(file_model_->filePath(last_model_index_));
+    dialog->show();
+}
+
+void FileSystemWidget::slotTagList(){
+
+}
+
 //PRIVATE METHODS--------------------------------------------------------
 
 void FileSystemWidget::ContextMenusInitialization(){
@@ -195,6 +207,15 @@ void FileSystemWidget::ContextMenusInitialization(){
     file_list_context_menu_->addAction(delete_file_action);
     connect(delete_file_action, SIGNAL(triggered()), this, SLOT(slotDeleteFile()));
 
+    //Operations with html files
+    html_sub_menu_ = new QMenu("html", this);
+    QAction *href_file_list_action = new QAction("Href file list", this);
+    html_sub_menu_->addAction(href_file_list_action);
+    connect(href_file_list_action, SIGNAL(triggered()), this, SLOT(slotHrefFileList()));
+    QAction *tag_list_action = new QAction("Tag list", this);
+    html_sub_menu_->addAction(tag_list_action);
+    connect(href_file_list_action, SIGNAL(triggered()), this, SLOT(slotTagList()));
+
 //DIR TREE CONTEXT MENU
     dir_tree_context_menu_ = new QMenu(this);
 
@@ -221,12 +242,18 @@ void FileSystemWidget::ContextMenusInitialization(){
     QAction *delete_dir_action = new QAction("Delete folder", this);
     dir_tree_context_menu_->addAction(delete_dir_action);
     connect(delete_dir_action, SIGNAL(triggered()), this, SLOT(slotDeleteDir()));
+
 }
 
 void FileSystemWidget::FileListViewContextMenu(const QPoint &pos){
     if(file_model_ != nullptr){
         last_model_index_ = ui->FileListView->indexAt(ui->FileListView->mapFromParent(pos));
         if(last_model_index_.isValid()){
+            if(QFileInfo(file_model_->filePath(last_model_index_)).suffix() == "html"){
+                file_list_context_menu_->addMenu(html_sub_menu_);
+            }else{
+                file_list_context_menu_->removeAction(html_sub_menu_->menuAction());
+            }
             file_list_context_menu_->exec(mapToGlobal(pos));
         }else{
             empty_file_list_context_menu_->exec(mapToGlobal(pos));
