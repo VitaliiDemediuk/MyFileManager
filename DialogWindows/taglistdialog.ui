@@ -48,7 +48,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="NewTagLineEdit"/>
+        <widget class="QLineEdit" name="NewTagLineEdit">
+         <property name="placeholderText">
+          <string>New tag</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

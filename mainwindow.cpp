@@ -13,7 +13,6 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , text_editor_widget_(new TextEditor(this, parent))
 {
     ui->setupUi(this);
 }
@@ -21,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete text_editor_widget_;
 }
 
 void MainWindow::on_FirstFileSystemWidget_customContextMenuRequested(const QPoint &pos){
@@ -48,9 +46,10 @@ void MainWindow::keyPressEvent(QKeyEvent *pe){
 }
 
 void MainWindow::OpenTextEditor(const QString& file_path){
-    if(text_editor_widget_->SetFile(file_path)){
-        text_editor_widget_->setGeometry(this->x(), this->y()+37, this->width(), this->height());
-        text_editor_widget_->show();
+    TextEditor* text_editor_widget = new TextEditor(this);
+    if(text_editor_widget->SetFile(file_path)){
+        text_editor_widget->setGeometry(this->x(), this->y()+37, this->width(), this->height());
+        text_editor_widget->show();
         this->hide();
     }
 }

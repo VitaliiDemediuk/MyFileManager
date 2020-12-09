@@ -20,6 +20,7 @@ SOURCES += \
     OSInitializer/linuxinitializerstrategy.cpp \
     OSInitializer/osinitializercreator.cpp \
     OSInitializer/osinitializerstrategy.cpp \
+    TextEditor/searchhightlight.cpp \
     TextEditor/texteditor.cpp \
     main.cpp \
     mainwindow.cpp
@@ -36,6 +37,7 @@ HEADERS += \
     OSInitializer/linuxinitializerstrategy.h \
     OSInitializer/osinitializercreator.h \
     OSInitializer/osinitializerstrategy.h \
+    TextEditor/searchhightlight.h \
     TextEditor/texteditor.h \
     mainwindow.h
 

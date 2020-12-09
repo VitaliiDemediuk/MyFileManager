@@ -81,7 +81,7 @@
           </font>
          </property>
          <property name="text">
-          <string>All types</string>
+          <string>All types:</string>
          </property>
         </widget>
        </item>
@@ -237,7 +237,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Other types (use a comma as a separator)</string>
+          <string>Other types:</string>
          </property>
         </widget>
        </item>
@@ -275,6 +275,9 @@
            </property>
            <property name="accessibleDescription">
             <string/>
+           </property>
+           <property name="placeholderText">
+            <string>Use comma as a separator</string>
            </property>
            <property name="clearButtonEnabled">
             <bool>false</bool>

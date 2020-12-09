@@ -26,7 +26,6 @@ protected:
     void keyPressEvent(QKeyEvent *pe);
 private:
     Ui::MainWindow *ui;
-    TextEditor *text_editor_widget_;
     void OpenTextEditor(const QString& file_path);
 
 };
